@@ -1,0 +1,14 @@
+Bitcoin
+=======
+
+Container for BitcoinUnlimited: https://www.bitcoinunlimited.info/
+
+
+Todo
+====
+
+* add branches for all the forks of the reference client
+* document how to run with your own config
+* document how to run bitcoin-cli inside the container
+* document how to run behind a proxy on another container
+* document how to run as a Tor hidden service
