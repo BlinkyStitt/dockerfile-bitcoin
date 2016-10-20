@@ -1,9 +1,14 @@
 Bitcoin
 =======
 
-Container for BitcoinUnlimited: https://www.bitcoinunlimited.info/
+Run a Bitcoin node inside docker. Each git branch has a different fork of the reference client.
 
-Check it out on Docker Hub: https://hub.docker.com/r/bwstitt/bitcoin/
+ - Unlimited: https://www.bitcoinunlimited.info/
+ - Core: https://bitcoincore.org/
+
+More choices coming soon.
+
+Check it out on Docker Hub: https://hub.docker.com/r/bwstitt/bitcoin/tags
 
 
 Todo
