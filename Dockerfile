@@ -7,14 +7,17 @@
 FROM bwstitt/library-ubuntu:16.04
 
 ENV bitcoin_ppa bitcoin-unlimited/bu-ppa
-ENV bitcoin_package bitcoinunlimited
-ENV bitcoin_label $bitcoin_package
+# todo: do they really collide on the package name?
+ENV bitcoin_package bitcoind
+ENV bitcoin_label bitcoinunlimited
 
-# install bitcoin (and wget for alert scripts)
+# install the PPA
 # todo: software-properties-common is really heavy just to add a ppa...
 RUN docker-apt-install software-properties-common \
- && add-apt-repository ppa:${bitcoin_ppa} \
- && docker-apt-install \
+ && add-apt-repository ppa:${bitcoin_ppa}
+
+# install bitcoin (and wget for alert scripts)
+RUN docker-apt-install \
     ${bitcoin_package} \
     wget
 
