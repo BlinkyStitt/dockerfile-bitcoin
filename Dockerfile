@@ -36,8 +36,8 @@ VOLUME /home/bitcoin/.bitcoin
 
 # run the daemon by default
 WORKDIR /home/bitcoin
-ENTRYPOINT bitcoind
-CMD -printtoconsole
+ENTRYPOINT ["bitcoind"]
+CMD ["-printtoconsole"]
 
 EXPOSE 8332
 EXPOSE 8333
