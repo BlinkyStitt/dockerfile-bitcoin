@@ -6,17 +6,15 @@
 
 FROM bwstitt/library-ubuntu:16.04
 
-ENV bitcoin_ppa bitcoin-unlimited/bu-ppa
-ENV bitcoin_package bitcoind
-ENV bitcoin_label bitcoinunlimited
-
 # todo: software-properties-common is really heavy just to add a ppa...
 RUN docker-apt-install software-properties-common
 
 # install the PPA
+ARG bitcoin_ppa=bitcoin-unlimited/bu-ppa
 RUN add-apt-repository ppa:${bitcoin_ppa}
 
-# install bitcoin (and wget for alert scripts)
+# install the bitcoind package (and wget for alert scripts)
+ARG bitcoin_package=bitcoind
 RUN docker-apt-install \
     ${bitcoin_package} \
     wget
@@ -27,7 +25,9 @@ USER bitcoin
 ENV HOME=/home/bitcoin
 ENV PATH="${PATH}:/home/bitcoin/bin"
 
+# setup bare-bones config
 ADD bitcoin.conf /home/bitcoin/.bitcoin/bitcoin.conf
+# TODO: I wish ADD kept the USER
 USER root
 RUN chown -R bitcoin:bitcoin /home/bitcoin/.bitcoin
 USER bitcoin
@@ -36,12 +36,7 @@ VOLUME /home/bitcoin/.bitcoin
 
 # run the daemon by default
 WORKDIR /home/bitcoin
-ENTRYPOINT ["bitcoind"]
-CMD ["-printtoconsole"]
+CMD bitcoind -printtoconsole
 
 EXPOSE 8332
 EXPOSE 8333
-
-# Rockerfiles have this, but don't work with Docker Hub
-# ATTACH /bin/bash -l
-# PUSH bwstitt/bitcoin:{{ $bitcoin_label }}
