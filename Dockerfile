@@ -38,5 +38,5 @@ VOLUME /home/bitcoin/.bitcoin
 WORKDIR /home/bitcoin
 CMD bitcoind -printtoconsole
 
-EXPOSE 8332
+# EXPOSE 8332
 EXPOSE 8333
