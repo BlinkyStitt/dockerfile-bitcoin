@@ -24,19 +24,16 @@ RUN useradd -ms /bin/bash bitcoin
 USER bitcoin
 ENV HOME=/home/bitcoin
 ENV PATH="${PATH}:/home/bitcoin/bin"
+WORKDIR /home/bitcoin
 
-# setup bare-bones config
-ADD bitcoin.conf /home/bitcoin/.bitcoin/bitcoin.conf
-# TODO: I wish ADD kept the USER
-USER root
-RUN chown -R bitcoin:bitcoin /home/bitcoin/.bitcoin
-USER bitcoin
-
+# setup volume for the config and data
+RUN mkdir ~/.bitcoin
 VOLUME /home/bitcoin/.bitcoin
 
 # run the daemon by default
-WORKDIR /home/bitcoin
 CMD bitcoind -printtoconsole
 
-# EXPOSE 8332
+HEALTHCHECK --interval=5m --timeout=3s \
+    CMD bitcoin-cli getinfo || exit 1
+
 EXPOSE 8333
