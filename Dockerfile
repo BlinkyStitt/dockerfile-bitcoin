@@ -1,12 +1,6 @@
-#
-# Quick and easy bitcoin node
-#
-# todo: template this to support multiple bitcoin implementations
-#
-
 FROM bwstitt/library-ubuntu:16.04
 
-# todo: software-properties-common is really heavy just to add a ppa...
+# TODO: software-properties-common is really heavy just to add a ppa...
 RUN docker-apt-install software-properties-common
 
 # install the PPA
