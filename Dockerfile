@@ -29,5 +29,3 @@ CMD bitcoind -printtoconsole
 
 HEALTHCHECK --interval=5m --timeout=3s \
     CMD bitcoin-cli getinfo || exit 1
-
-EXPOSE 8333
