@@ -1,4 +1,4 @@
-FROM bwstitt/library-ubuntu:16.04
+FROM bwstitt/ubuntu:16.04
 
 # TODO: software-properties-common is really heavy just to add a ppa...
 RUN docker-apt-install software-properties-common
