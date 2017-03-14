@@ -13,16 +13,15 @@ RUN docker-apt-install \
     ${bitcoin_package} \
     wget
 
-# create user
-RUN useradd -ms /bin/bash bitcoin
-USER bitcoin
-ENV HOME=/home/bitcoin
-ENV PATH="${PATH}:/home/bitcoin/bin"
-WORKDIR /home/bitcoin
+# use the abc user that comes with the image
+USER abc
+ENV HOME=/home/abc
+ENV PATH="${PATH}:/home/abc/bin"
+WORKDIR /home/abc
 
 # setup volume for the config and data
 RUN mkdir ~/.bitcoin
-VOLUME /home/bitcoin/.bitcoin
+VOLUME /home/abc/.bitcoin
 
 # run the daemon by default
 CMD bitcoind -printtoconsole
