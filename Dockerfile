@@ -4,7 +4,7 @@ FROM bwstitt/ubuntu:16.04
 RUN docker-apt-install software-properties-common
 
 # install the PPA
-ARG bitcoin_ppa=bitcoin/bitcoin
+ARG bitcoin_ppa=bitcoinclassic/bitcoinclassic
 RUN add-apt-repository ppa:${bitcoin_ppa}
 
 # install the bitcoind package (and wget for alert scripts)
